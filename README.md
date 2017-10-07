@@ -1,5 +1,14 @@
+[![npm version](https://badge.fury.io/js/%40miracledevs%2Fparadigm-ui-web-shared.svg)](https://badge.fury.io/js/%40miracledevs%2Fparadigm-ui-web-shared)
+
 # Paradigm.Web.Shared
 Typescript library with helper classes like ArrayLists, Dictionaries, extensions for base objects and more.
+
+NPM
+---
+```
+npm install --save @miracledevs/paradigm-ui-web-shared
+```
+
 
 Change log
 ---
