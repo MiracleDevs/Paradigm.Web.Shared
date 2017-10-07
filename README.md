@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/MiracleDevs/Paradigm.Web.Shared.svg?branch=master)](https://travis-ci.org/MiracleDevs/Paradigm.Web.Shared)
 [![npm version](https://badge.fury.io/js/%40miracledevs%2Fparadigm-ui-web-shared.svg)](https://badge.fury.io/js/%40miracledevs%2Fparadigm-ui-web-shared)
 
 # Paradigm.Web.Shared
