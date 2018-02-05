@@ -14,6 +14,9 @@ npm install --save @miracledevs/paradigm-ui-web-shared
 Change log
 ---
 
+Version `1.0.4`
+- Updated npm dependencies.
+
 Version `1.0.3`
 - Changed repository from gitlab to github.
 
