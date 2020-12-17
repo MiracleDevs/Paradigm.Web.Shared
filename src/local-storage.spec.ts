@@ -73,9 +73,9 @@ describe("Local Storage", () =>
     {
         it("should store and retrieve dates", () =>
         {
-            expect(() => LocalStorage.set("date", new Date(12, 12, 12))).not.toThrow();
-            expect(LocalStorage.get(Date, "date").getTime()).toBe(new Date(12, 12, 12).getTime());
-            expect(LocalStorage.getDate("date").getTime()).toBe(new Date(12, 12, 12).getTime());
+            expect(() => LocalStorage.set("date", new Date(2020, 1, 1, 0, 0, 0, 0))).not.toThrow();
+            expect(LocalStorage.get(Date, "date").getTime()).toBe(new Date(2020, 1, 1, 0, 0, 0, 0).getTime());
+            expect(LocalStorage.getDate("date").getTime()).toBe(new Date(2020, 1, 1, 0, 0, 0, 0).getTime());
         });
 
         it("should retrieve null if the value is not present in the storage", () =>

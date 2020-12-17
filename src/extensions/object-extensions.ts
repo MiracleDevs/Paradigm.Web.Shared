@@ -19,8 +19,8 @@ export class ObjectExtensions
         if (objectInstance === null || objectInstance === undefined)
             throw new Error("Object can not be null.");
 
-        var funcNameRegex = /function (.{1,})\(/;
-        var results = (funcNameRegex).exec((objectInstance).constructor.toString());
+        var funcNameRegex = /function (.{1,})\(.*\).*\{.*\}.*/;
+        var results = (funcNameRegex).exec(objectInstance.constructor.toString());
 
         return (results && results.length > 1) ? results[1] : "";
     }

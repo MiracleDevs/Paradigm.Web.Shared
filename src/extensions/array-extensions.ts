@@ -128,7 +128,7 @@ export class ArrayExtensions
         return count;
     }
 
-    static sum<T, TI>(array: Array<T>, predicate?: (element: T) => TI): TI
+    static sum<T, TI = any>(array: Array<T>, predicate?: (element: T) => TI): TI
     {
         var sum = null;
 
