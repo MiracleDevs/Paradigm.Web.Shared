@@ -26,9 +26,9 @@
         port: 9876,
         colors: true,
         reporters: ["dots", "karma-typescript"],
-        browsers: ["ChromeHeadless"],
+        browsers: ["ChromeHeadless", "Firefox"],
         logLevel: config.LOG_INFO,
         autoWatch: false,
-        concurrency: Infinity
+        concurrency: 1
     });
 };

@@ -37,6 +37,7 @@
     "jasmine-core": "3.6.0",
     "karma": "5.2.3",
     "karma-chrome-launcher": "^3.1.0",
+    "karma-firefox-launcher": "^2.1.2",
     "karma-jasmine": "^4.0.1",
     "karma-nyan-reporter": "^0.2.5",
     "karma-typescript": "^5.2.0",
