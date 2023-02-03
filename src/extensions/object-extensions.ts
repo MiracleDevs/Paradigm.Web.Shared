@@ -19,10 +19,15 @@ export class ObjectExtensions
         if (objectInstance === null || objectInstance === undefined)
             throw new Error("Object can not be null.");
 
-        var funcNameRegex = /function (.{1,})\(.*\).*\{.*\}.*/;
-        var results = (funcNameRegex).exec(objectInstance.constructor.toString());
-
-        return (results && results.length > 1) ? results[1] : "";
+            if(objectInstance.constructor != undefined){
+                var funcNameRegex = /function ([\w]+)\(/;
+                var results = (funcNameRegex).exec(objectInstance.constructor.toString());
+                return (results && results.length > 1) ? results[1] : "";
+            }else{
+                var objType = typeof objectInstance;
+                var casedObjectType = objType.charAt(0).toUpperCase() + objType.slice(1);
+                return casedObjectType;
+            }
     }
 
     static isNativeValueType(objectInstance: any): boolean
