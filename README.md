@@ -14,6 +14,10 @@ npm install --save @miracledevs/paradigm-ui-web-shared
 Change log
 ---
 
+Version `1.0.6`
+- Updated npm dependencies.
+- Updated ObjectExtensions.getTypeName to work in Firefox.
+
 Version `1.0.5`
 - Updated npm dependencies.
 - Updated ObjectExtensions.getTypeName.
