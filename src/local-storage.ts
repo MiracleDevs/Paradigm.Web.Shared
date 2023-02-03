@@ -7,100 +7,90 @@
 import { FunctionExtensions } from "./extensions/function-extensions";
 import { Dictionary } from "./collections/dictionary";
 
-export class LocalStorage
-{
-    static set<T>(name: string, value: T): void
-    {
+export class LocalStorage {
+    static set<T extends { toString(): string }>(name: string, value: T): void {
         localStorage.setItem(name, value.toString());
     }
 
-    static setObject<T>(name: string, value: T): void
-    {
+    static setObject<T>(name: string, value: T): void {
         localStorage.setItem(name, JSON.stringify(value));
     }
 
-    static get<T>(type: { new(): T }, name: string): T
-    {
+    static get<T>(type: { new (): T }, name: string): T | null {
         if (FunctionExtensions.getFunctionName(type) === FunctionExtensions.getFunctionName(Number))
-            return (LocalStorage.getNumber(name) as any) as T;
+            return LocalStorage.getNumber(name) as T;
 
         if (FunctionExtensions.getFunctionName(type) === FunctionExtensions.getFunctionName(Boolean))
-            return (LocalStorage.getBoolean(name) as any) as T;
+            return LocalStorage.getBoolean(name) as T;
 
-        if (FunctionExtensions.getFunctionName(type) === FunctionExtensions.getFunctionName(Date))
-            return (LocalStorage.getDate(name) as any) as T;
+        if (FunctionExtensions.getFunctionName(type) === FunctionExtensions.getFunctionName(Date)) return LocalStorage.getDate(name) as T;
 
         if (FunctionExtensions.getFunctionName(type) === FunctionExtensions.getFunctionName(String))
-            return (LocalStorage.getString(name) as any) as T;
+            return LocalStorage.getString(name) as T;
 
         return this.getObject<T>(type, name);
     }
 
-    static getInt(name: string): Number
-    {
+    static getInt(name: string): number | null {
         const value = localStorage.getItem(name);
         return !value ? null : parseInt(value, 10);
     }
 
-    static getNumber(name: string): Number
-    {
+    static getNumber(name: string): number | null {
         const value = localStorage.getItem(name);
         return !value ? null : parseFloat(value);
     }
 
-    static getBoolean(name: string): Boolean
-    {
+    static getBoolean(name: string): boolean | null {
         let value = localStorage.getItem(name);
 
-        if (!value)
-            return null;
+        if (!value) return null;
 
         value = value.toLowerCase();
 
         return value === "true" || value === "yes" || value === "1";
     }
 
-    static getDate(name: string): Date
-    {
+    static getDate(name: string): Date | null {
         const value = localStorage.getItem(name);
         return !value ? null : new Date(value);
     }
 
-    static getString(name: string): String
-    {
+    static getString(name: string): string | null {
         return localStorage.getItem(name);
     }
 
-    static getObject<T>(type: { new(): T }, name: string): T
-    {
-        var value = localStorage.getItem(name);
+    static getObject<T>(type: { new (): T }, name: string): T | null {
+        const value = localStorage.getItem(name);
 
-        if (!value)
-            return null;
+        if (!value) return null;
 
         return JSON.parse(value) as T;
     }
 
-    static remove(name: string): void
-    {
+    static remove(name: string): void {
         localStorage.removeItem(name);
     }
 
-    static getAllContent(): Dictionary<string, string>
-    {
+    static getAllContent(): Dictionary<string, string> {
         const dictionary = new Dictionary<string, string>();
 
-        for (let i = 0; i < localStorage.length; i++)
-        {
+        for (let i = 0; i < localStorage.length; i++) {
             const key = localStorage.key(i);
-            dictionary.add(key, localStorage.getItem(key));
+
+            if (key) {
+                const value = localStorage.getItem(key);
+
+                if (value) {
+                    dictionary.add(key, value);
+                }
+            }
         }
 
         return dictionary;
     }
 
-    static clear(): void
-    {
+    static clear(): void {
         localStorage.clear();
     }
 }

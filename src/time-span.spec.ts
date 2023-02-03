@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /*!
  * Paradigm Framework - Web Shared
  * Copyright (c) 2017 Miracle Devs, Inc
@@ -7,10 +8,9 @@
 import { TimeSpan } from "./time-span";
 import { DateExtensions } from "./extensions/date-extensions";
 
-var started = DateExtensions.addHours(new Date(), 1);
+const started = DateExtensions.addHours(new Date(), 1);
 
-describe("TimeSpan", () =>
-{
+describe("TimeSpan", () => {
     const nullTimeSpanError = "The time span can not be null.";
 
     const nullError = "The milliseconds can not be null.";
@@ -19,9 +19,7 @@ describe("TimeSpan", () =>
 
     const infinityError = "The milliseconds can not be infinite";
 
-    describe("Static Methods", () =>
-    {
-
+    describe("Static Methods", () => {
         it("should get millisencods per second", () => expect(TimeSpan.millisecondsPerSecond).toBe(1000));
 
         it("should get millisencods per minute", () => expect(TimeSpan.millisecondsPerMinute).toBe(60000));
@@ -30,17 +28,16 @@ describe("TimeSpan", () =>
 
         it("should get millisencods per day", () => expect(TimeSpan.millisecondsPerDay).toBe(86400000));
 
-        it("should get the current timespan", () =>
-        {
-            var before = new Date();
-            var now = TimeSpan.now;
-            var after = new Date();
+        it("should get the current timespan", () => {
+            const before = new Date();
+            const now = TimeSpan.now;
+            const after = new Date();
 
-            expect(now.milliseconds >= before.valueOf() &&
-                now.milliseconds <= after.valueOf()).toBe(true);
+            expect(now.milliseconds >= before.valueOf() && now.milliseconds <= after.valueOf()).toBe(true);
         });
 
-        it("should get milliseconds since the app started", () => expect(TimeSpan.sinceTheApplicationStarted.milliseconds).toBeLessThan(started.valueOf()));
+        it("should get milliseconds since the app started", () =>
+            expect(TimeSpan.sinceTheApplicationStarted.milliseconds).toBeLessThan(started.valueOf()));
 
         it("should get zero timespan", () => expect(TimeSpan.zero.milliseconds).toBe(0));
 
@@ -69,60 +66,55 @@ describe("TimeSpan", () =>
         it("should get one day timespan", () => expect(TimeSpan.oneDay.milliseconds).toBe(86400000));
     });
 
-    describe("Create", () =>
-    {
+    describe("Create", () => {
         it("should create a positive timespan", () => expect(new TimeSpan(1000).milliseconds).toBe(1000));
 
         it("should create a zero timespan", () => expect(new TimeSpan(0).milliseconds).toBe(0));
 
         it("should create a negative timespan as a zero timespan", () => expect(new TimeSpan(-1000).milliseconds).toBe(0));
 
-        it("shouldn't create a null timespan", () => expect(() => new TimeSpan(null)).toThrowError(nullError));
+        it("shouldn't create a null timespan", () => expect(() => new TimeSpan(null as any)).toThrowError(nullError));
 
-        it("shouldn't create a undefined timespan", () => expect(() => new TimeSpan(undefined)).toThrowError(nullError));
+        it("shouldn't create a undefined timespan", () => expect(() => new TimeSpan(undefined as any)).toThrowError(nullError));
 
         it("shouldn't create a NaN timespan", () => expect(() => new TimeSpan(NaN)).toThrowError(nanError));
 
         it("shouldn't create a infinite timespan", () => expect(() => new TimeSpan(Infinity)).toThrowError(infinityError));
     });
 
-    describe("Add timespan", () =>
-    {
-        it("should return the same instance", () =>
-        {
-            var timeSpan = TimeSpan.zero;
+    describe("Add timespan", () => {
+        it("should return the same instance", () => {
+            const timeSpan = TimeSpan.zero;
             expect(timeSpan.add(TimeSpan.oneDay)).toBe(timeSpan);
         });
 
         it("should add a timespan", () => expect(TimeSpan.zero.add(TimeSpan.oneSecond).milliseconds).toBe(1000));
 
-        it("shouldn't add a null timespan", () => expect(() => TimeSpan.oneSecond.add(null)).toThrowError(nullTimeSpanError));
+        it("shouldn't add a null timespan", () => expect(() => TimeSpan.oneSecond.add(null as any)).toThrowError(nullTimeSpanError));
 
-        it("shouldn't add a undefined timespan", () => expect(() => TimeSpan.oneSecond.add(undefined)).toThrowError(nullTimeSpanError));
+        it("shouldn't add a undefined timespan", () => expect(() => TimeSpan.oneSecond.add(undefined as any)).toThrowError(nullTimeSpanError));
     });
 
-    describe("Subtract timespan", () =>
-    {
-        it("should return the same instance", () =>
-        {
-            var timeSpan = TimeSpan.zero;
+    describe("Subtract timespan", () => {
+        it("should return the same instance", () => {
+            const timeSpan = TimeSpan.zero;
             expect(timeSpan.subtract(TimeSpan.oneDay)).toBe(timeSpan);
         });
 
         it("should subtract a timespan", () => expect(TimeSpan.oneMinute.subtract(TimeSpan.oneSecond).milliseconds).toBe(59000));
 
-        it("should round to zero if the subtraction is less than 0", () => expect(TimeSpan.oneSecond.subtract(TimeSpan.oneMinute).milliseconds).toBe(0));
+        it("should round to zero if the subtraction is less than 0", () =>
+            expect(TimeSpan.oneSecond.subtract(TimeSpan.oneMinute).milliseconds).toBe(0));
 
-        it("shouldn't subtract a null timespan", () => expect(() => TimeSpan.oneSecond.subtract(null)).toThrowError(nullTimeSpanError));
+        it("shouldn't subtract a null timespan", () => expect(() => TimeSpan.oneSecond.subtract(null as any)).toThrowError(nullTimeSpanError));
 
-        it("shouldn't subtract a undefined timespan", () => expect(() => TimeSpan.oneSecond.subtract(undefined)).toThrowError(nullTimeSpanError));
+        it("shouldn't subtract a undefined timespan", () =>
+            expect(() => TimeSpan.oneSecond.subtract(undefined as any)).toThrowError(nullTimeSpanError));
     });
 
-    describe("Add Milliseconds", () =>
-    {
-        it("should return the same instance", () =>
-        {
-            var timeSpan = TimeSpan.zero;
+    describe("Add Milliseconds", () => {
+        it("should return the same instance", () => {
+            const timeSpan = TimeSpan.zero;
             expect(timeSpan.addMilliseconds(1000)).toBe(timeSpan);
         });
 
@@ -132,20 +124,18 @@ describe("TimeSpan", () =>
 
         it("should round to zero if the value is less than zero", () => expect(TimeSpan.oneSecond.addMilliseconds(-2000).milliseconds).toBe(0));
 
-        it("shouldn't add a null number", () => expect(() => TimeSpan.oneSecond.addMilliseconds(null)).toThrowError(nullError));
+        it("shouldn't add a null number", () => expect(() => TimeSpan.oneSecond.addMilliseconds(null as any)).toThrowError(nullError));
 
-        it("shouldn't add a undefined number", () => expect(() => TimeSpan.oneSecond.addMilliseconds(undefined)).toThrowError(nullError));
+        it("shouldn't add a undefined number", () => expect(() => TimeSpan.oneSecond.addMilliseconds(undefined as any)).toThrowError(nullError));
 
         it("shouldn't add a NaN number", () => expect(() => TimeSpan.oneSecond.addMilliseconds(NaN)).toThrowError(nanError));
 
         it("shouldn't add a infinite number", () => expect(() => TimeSpan.oneSecond.addMilliseconds(Infinity)).toThrowError(infinityError));
     });
 
-    describe("Add Seconds", () =>
-    {
-        it("should return the same instance", () =>
-        {
-            var timeSpan = TimeSpan.zero;
+    describe("Add Seconds", () => {
+        it("should return the same instance", () => {
+            const timeSpan = TimeSpan.zero;
             expect(timeSpan.addSeconds(1000)).toBe(timeSpan);
         });
 
@@ -155,20 +145,18 @@ describe("TimeSpan", () =>
 
         it("should round to zero if the value is less than zero", () => expect(TimeSpan.oneSecond.addSeconds(-2000).milliseconds).toBe(0));
 
-        it("shouldn't add a null number", () => expect(() => TimeSpan.oneSecond.addSeconds(null)).toThrowError(nullError));
+        it("shouldn't add a null number", () => expect(() => TimeSpan.oneSecond.addSeconds(null as any)).toThrowError(nullError));
 
-        it("shouldn't add a undefined number", () => expect(() => TimeSpan.oneSecond.addSeconds(undefined)).toThrowError(nullError));
+        it("shouldn't add a undefined number", () => expect(() => TimeSpan.oneSecond.addSeconds(undefined as any)).toThrowError(nullError));
 
         it("shouldn't add a NaN number", () => expect(() => TimeSpan.oneSecond.addSeconds(NaN)).toThrowError(nanError));
 
         it("shouldn't add a infinite number", () => expect(() => TimeSpan.oneSecond.addSeconds(Infinity)).toThrowError(infinityError));
     });
 
-    describe("Add Minutes", () =>
-    {
-        it("should return the same instance", () =>
-        {
-            var timeSpan = TimeSpan.zero;
+    describe("Add Minutes", () => {
+        it("should return the same instance", () => {
+            const timeSpan = TimeSpan.zero;
             expect(timeSpan.addMinutes(1000)).toBe(timeSpan);
         });
 
@@ -178,20 +166,18 @@ describe("TimeSpan", () =>
 
         it("should round to zero if the value is less than zero", () => expect(TimeSpan.oneSecond.addMinutes(-2000).milliseconds).toBe(0));
 
-        it("shouldn't add a null number", () => expect(() => TimeSpan.oneSecond.addMinutes(null)).toThrowError(nullError));
+        it("shouldn't add a null number", () => expect(() => TimeSpan.oneSecond.addMinutes(null as any)).toThrowError(nullError));
 
-        it("shouldn't add a undefined number", () => expect(() => TimeSpan.oneSecond.addMinutes(undefined)).toThrowError(nullError));
+        it("shouldn't add a undefined number", () => expect(() => TimeSpan.oneSecond.addMinutes(undefined as any)).toThrowError(nullError));
 
         it("shouldn't add a NaN number", () => expect(() => TimeSpan.oneSecond.addMinutes(NaN)).toThrowError(nanError));
 
         it("shouldn't add a infinite number", () => expect(() => TimeSpan.oneSecond.addMinutes(Infinity)).toThrowError(infinityError));
     });
 
-    describe("Add Hours", () =>
-    {
-        it("should return the same instance", () =>
-        {
-            var timeSpan = TimeSpan.zero;
+    describe("Add Hours", () => {
+        it("should return the same instance", () => {
+            const timeSpan = TimeSpan.zero;
             expect(timeSpan.addHours(1000)).toBe(timeSpan);
         });
 
@@ -201,20 +187,18 @@ describe("TimeSpan", () =>
 
         it("should round to zero if the value is less than zero", () => expect(TimeSpan.oneSecond.addHours(-2000).milliseconds).toBe(0));
 
-        it("shouldn't add a null number", () => expect(() => TimeSpan.oneSecond.addHours(null)).toThrowError(nullError));
+        it("shouldn't add a null number", () => expect(() => TimeSpan.oneSecond.addHours(null as any)).toThrowError(nullError));
 
-        it("shouldn't add a undefined number", () => expect(() => TimeSpan.oneSecond.addHours(undefined)).toThrowError(nullError));
+        it("shouldn't add a undefined number", () => expect(() => TimeSpan.oneSecond.addHours(undefined as any)).toThrowError(nullError));
 
         it("shouldn't add a NaN number", () => expect(() => TimeSpan.oneSecond.addHours(NaN)).toThrowError(nanError));
 
         it("shouldn't add a infinite number", () => expect(() => TimeSpan.oneSecond.addHours(Infinity)).toThrowError(infinityError));
     });
 
-    describe("Add Days", () =>
-    {
-        it("should return the same instance", () =>
-        {
-            var timeSpan = TimeSpan.zero;
+    describe("Add Days", () => {
+        it("should return the same instance", () => {
+            const timeSpan = TimeSpan.zero;
             expect(timeSpan.addDays(1000)).toBe(timeSpan);
         });
 
@@ -224,17 +208,16 @@ describe("TimeSpan", () =>
 
         it("should round to zero if the value is less than zero", () => expect(TimeSpan.oneSecond.addDays(-2000).milliseconds).toBe(0));
 
-        it("shouldn't add a null number", () => expect(() => TimeSpan.oneSecond.addDays(null)).toThrowError(nullError));
+        it("shouldn't add a null number", () => expect(() => TimeSpan.oneSecond.addDays(null as any)).toThrowError(nullError));
 
-        it("shouldn't add a undefined number", () => expect(() => TimeSpan.oneSecond.addDays(undefined)).toThrowError(nullError));
+        it("shouldn't add a undefined number", () => expect(() => TimeSpan.oneSecond.addDays(undefined as any)).toThrowError(nullError));
 
         it("shouldn't add a NaN number", () => expect(() => TimeSpan.oneSecond.addDays(NaN)).toThrowError(nanError));
 
         it("shouldn't add a infinite number", () => expect(() => TimeSpan.oneSecond.addDays(Infinity)).toThrowError(infinityError));
     });
 
-    describe("Time convertion", () =>
-    {
+    describe("Time convertion", () => {
         it("should convert to seconds", () => expect(TimeSpan.oneSecond.toSeconds()).toBe(1));
 
         it("should convert to minutes", () => expect(TimeSpan.oneMinute.toMinutes()).toBe(1));
@@ -244,39 +227,37 @@ describe("TimeSpan", () =>
         it("should convert to days", () => expect(TimeSpan.oneDay.toDays()).toBe(1));
     });
 
-    describe("Copy", () =>
-    {
-        it("should copy a time span", () =>
-        {
-
-            var timeSpan1 = new TimeSpan(120);
-            var timeSpan2 = timeSpan1.copy();
+    describe("Copy", () => {
+        it("should copy a time span", () => {
+            const timeSpan1 = new TimeSpan(120);
+            const timeSpan2 = timeSpan1.copy();
 
             expect(timeSpan1.milliseconds).toBe(timeSpan2.milliseconds);
             expect(timeSpan1).not.toBe(timeSpan2);
         });
     });
 
-    describe("To String", () =>
-    {
+    describe("To String", () => {
         it("should convert to string", () => expect(TimeSpan.oneSecond.toString()).toBe("1000ms"));
     });
 
-    describe("Difference", () =>
-    {
+    describe("Difference", () => {
         it("should calculate the difference", () => expect(TimeSpan.oneMinute.difference(TimeSpan.oneSecond)).toBe(59000));
 
-        it("shouldn't calculate the difference of a null", () => expect(() => TimeSpan.oneSecond.difference(null)).toThrowError(nullTimeSpanError));
+        it("shouldn't calculate the difference of a null", () =>
+            expect(() => TimeSpan.oneSecond.difference(null as any)).toThrowError(nullTimeSpanError));
 
-        it("shouldn't calculate the difference of a undefined", () => expect(() => TimeSpan.oneSecond.difference(undefined)).toThrowError(nullTimeSpanError));
+        it("shouldn't calculate the difference of a undefined", () =>
+            expect(() => TimeSpan.oneSecond.difference(undefined as any)).toThrowError(nullTimeSpanError));
     });
 
-    describe("Percentage", () =>
-    {
+    describe("Percentage", () => {
         it("should calculate the percentage", () => expect(new TimeSpan(900).percentage(new TimeSpan(1000))).toBe(0.9));
 
-        it("shouldn't calculate the percentage of a null", () => expect(() => TimeSpan.oneSecond.percentage(null)).toThrowError(nullTimeSpanError));
+        it("shouldn't calculate the percentage of a null", () =>
+            expect(() => TimeSpan.oneSecond.percentage(null as any)).toThrowError(nullTimeSpanError));
 
-        it("shouldn't calculate the percentage of a undefined", () => expect(() => TimeSpan.oneSecond.percentage(undefined)).toThrowError(nullTimeSpanError));
+        it("shouldn't calculate the percentage of a undefined", () =>
+            expect(() => TimeSpan.oneSecond.percentage(undefined as any)).toThrowError(nullTimeSpanError));
     });
 });

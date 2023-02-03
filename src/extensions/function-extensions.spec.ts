@@ -1,29 +1,25 @@
-﻿/*!
+﻿/* eslint-disable @typescript-eslint/ban-types */
+/*!
  * Paradigm Framework - Web Shared
  * Copyright (c) 2017 Miracle Devs, Inc
  * Licensed under MIT (https://github.com/MiracleDevs/Paradigm.Web.Shared/blob/master/LICENSE)
  */
 
-import { PersonMock } from "./person-mock.spec";
+import { PersonMock } from "./person-mock";
 import { FunctionExtensions } from "./function-extensions";
 
-function testFunction(): void
-{
+function testFunction(): void {
     /* test function */
 }
 
-const functionVariable = testFunction;
-
-const anonymousFunction =  function (): void {
+const anonymousFunction = function (): void {
     /* test function */
 };
 
-const wrongObject : Function =  ({}) as Function;
+const wrongObject: Function = {} as Function;
 
-describe("Function", () =>
-{
-    describe("get function name", () =>
-    {
+describe("Function", () => {
+    describe("get function name", () => {
         it("should get function name of number", () => expect(FunctionExtensions.getFunctionName(Number)).toBe("Number"));
 
         it("should get function name of string", () => expect(FunctionExtensions.getFunctionName(String)).toBe("String"));
@@ -38,12 +34,14 @@ describe("Function", () =>
 
         it("should get function name of a function", () => expect(FunctionExtensions.getFunctionName(testFunction)).toBe("testFunction"));
 
-        it("should get function name of a variable pointing a function", () => expect(FunctionExtensions.getFunctionName(testFunction)).toBe("testFunction"));
+        it("should get function name of a variable pointing a function", () =>
+            expect(FunctionExtensions.getFunctionName(testFunction)).toBe("testFunction"));
 
-        it("should get function name of a variable pointing to an anonymous function", () => expect(FunctionExtensions.getFunctionName(anonymousFunction)).toBe("anonymousFunction"));
+        it("should get function name of a variable pointing to an anonymous function", () =>
+            expect(FunctionExtensions.getFunctionName(anonymousFunction)).toBe("anonymousFunction"));
 
         it("should get function name of an anonymous function", () => expect(FunctionExtensions.getFunctionName(() => 0)).toBe("anonymous"));
 
-        it("shouldnt get function name of an object", () => expect(FunctionExtensions.getFunctionName(wrongObject)).toBe("not a function"));
+        it("shouldn't get function name of an object", () => expect(FunctionExtensions.getFunctionName(wrongObject)).toBe("not a function"));
     });
 });

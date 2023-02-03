@@ -4,15 +4,13 @@
  * Licensed under MIT (https://github.com/MiracleDevs/Paradigm.Web.Shared/blob/master/LICENSE)
  */
 
-export class TimeSpan
-{
+export class TimeSpan {
     /**
      * Retrieves the number of milliseconds in one second.
      * @return {Number} Number of milliseconds in one second.
      * @static
      */
-    static get millisecondsPerSecond(): number
-    {
+    static get millisecondsPerSecond(): number {
         return 1000;
     }
 
@@ -21,8 +19,7 @@ export class TimeSpan
      * @return {Number} Number of milliseconds in one minute.
      * @static
      */
-    static get millisecondsPerMinute(): number
-    {
+    static get millisecondsPerMinute(): number {
         return 60000;
     }
 
@@ -31,8 +28,7 @@ export class TimeSpan
      * @return {Number} Number of milliseconds in one hour.
      * @static
      */
-    static get millisecondsPerHour(): number
-    {
+    static get millisecondsPerHour(): number {
         return 3600000;
     }
 
@@ -41,8 +37,7 @@ export class TimeSpan
      * @return {Number} Number of milliseconds in one day.
      * @static
      */
-    static get millisecondsPerDay(): number
-    {
+    static get millisecondsPerDay(): number {
         return 86400000;
     }
 
@@ -52,8 +47,7 @@ export class TimeSpan
      * @return {TimeSpan} Time span representing the current UTC time.
      * @static
      */
-    static get now(): TimeSpan
-    {
+    static get now(): TimeSpan {
         return new TimeSpan(new Date().valueOf());
     }
 
@@ -71,8 +65,7 @@ export class TimeSpan
      * @return {TimeSpan} Time elapsed sirce the Application started.
      * @static
      */
-    static get sinceTheApplicationStarted(): TimeSpan
-    {
+    static get sinceTheApplicationStarted(): TimeSpan {
         return TimeSpan.now.subtract(TimeSpan.applicationStarted);
     }
 
@@ -81,91 +74,117 @@ export class TimeSpan
      * @type TimeSpan
      * @static
      */
-    static get zero(): TimeSpan { return new TimeSpan(0); }
+    static get zero(): TimeSpan {
+        return new TimeSpan(0);
+    }
 
     /**
      * A time span which represents one millisecond.
      * @type TimeSpan
      * @static
      */
-    static get oneMillisecond(): TimeSpan { return new TimeSpan(1); }
+    static get oneMillisecond(): TimeSpan {
+        return new TimeSpan(1);
+    }
 
     /**
      * A time span which represents ten milliseconds.
      * @type TimeSpan
      * @static
      */
-    static get tenMilliseconds(): TimeSpan { return new TimeSpan(10); }
+    static get tenMilliseconds(): TimeSpan {
+        return new TimeSpan(10);
+    }
 
     /**
      * A time span which represents hundred milliseconds.
      * @type TimeSpan
      * @static
      */
-    static get hundredMilliseconds(): TimeSpan { return new TimeSpan(100); }
+    static get hundredMilliseconds(): TimeSpan {
+        return new TimeSpan(100);
+    }
 
     /**
      * A time span which represents a quarter of a second.
      * @type TimeSpan
      * @static
      */
-    static get quartedOfASecond(): TimeSpan { return new TimeSpan(250); }
+    static get quartedOfASecond(): TimeSpan {
+        return new TimeSpan(250);
+    }
 
     /**
      * A time span which represents five hundred millisencods, or half a second.
      * @type TimeSpan
      * @static
      */
-    static get halfSecond(): TimeSpan { return new TimeSpan(500); }
+    static get halfSecond(): TimeSpan {
+        return new TimeSpan(500);
+    }
 
     /**
      * A time span which represents one second.
      * @type TimeSpan
      * @static
      */
-    static get oneSecond(): TimeSpan { return TimeSpan.fromSeconds(1); }
+    static get oneSecond(): TimeSpan {
+        return TimeSpan.fromSeconds(1);
+    }
 
     /**
      * A time span which represents thirty seconds or half a minute.
      * @type TimeSpan
      * @static
      */
-    static get halfMinute(): TimeSpan { return TimeSpan.fromSeconds(30); }
+    static get halfMinute(): TimeSpan {
+        return TimeSpan.fromSeconds(30);
+    }
 
     /**
      * A time span which represents one minute.
      * @type TimeSpan
      * @static
      */
-    static get oneMinute(): TimeSpan { return TimeSpan.fromMinutes(1); }
+    static get oneMinute(): TimeSpan {
+        return TimeSpan.fromMinutes(1);
+    }
 
     /**
      * A time span which represents thirty minutes or half an hour.
      * @type TimeSpan
      * @static
      */
-    static get halfHour(): TimeSpan { return TimeSpan.fromMinutes(30); }
+    static get halfHour(): TimeSpan {
+        return TimeSpan.fromMinutes(30);
+    }
 
     /**
      * A time span which represents an hour.
      * @type TimeSpan
      * @static
      */
-    static get oneHour(): TimeSpan { return TimeSpan.fromHours(1); }
+    static get oneHour(): TimeSpan {
+        return TimeSpan.fromHours(1);
+    }
 
     /**
      * A time span which represents tweleve hours or half a day.
      * @type TimeSpan
      * @static
      */
-    static get halfDay(): TimeSpan { return TimeSpan.fromHours(12); }
+    static get halfDay(): TimeSpan {
+        return TimeSpan.fromHours(12);
+    }
 
     /**
      * A time span which represents on day.
      * @type TimeSpan
      * @static
      */
-    static get oneDay(): TimeSpan { return TimeSpan.fromDays(1); }
+    static get oneDay(): TimeSpan {
+        return TimeSpan.fromDays(1);
+    }
 
     /**
      * Number of milliseconds representing the time span.
@@ -177,18 +196,18 @@ export class TimeSpan
      * Number of milliseconds representing the time span.
      * @type Number
      */
-    get milliseconds(): number { return this.ms; }
+    get milliseconds(): number {
+        return this.ms;
+    }
 
     /**
      * Construct the milliseconds.
      * @param milliseconds
      */
-    constructor(milliseconds: number)
-    {
+    constructor(milliseconds: number) {
         this.validate(milliseconds);
 
-        if (milliseconds < 0)
-            milliseconds = 0;
+        if (milliseconds < 0) milliseconds = 0;
 
         this.ms = milliseconds;
     }
@@ -198,10 +217,8 @@ export class TimeSpan
      * @param {TimeSpan} timeSpan TimeSpan to be added to the current one.
      * @return {TimeSpan} A reference to the time span.
      */
-    add(timeSpan: TimeSpan): TimeSpan
-    {
-        if (timeSpan === null || timeSpan === undefined)
-            throw new Error("The time span can not be null.");
+    add(timeSpan: TimeSpan): TimeSpan {
+        if (timeSpan === null || timeSpan === undefined) throw new Error("The time span can not be null.");
 
         return this.addMilliseconds(timeSpan.milliseconds);
     }
@@ -211,10 +228,8 @@ export class TimeSpan
      * @param {TimeSpan} timeSpan TimeSpan to be added to the current one.
      * @return {TimeSpan} A reference to the time span.
      */
-    subtract(timeSpan: TimeSpan): TimeSpan
-    {
-        if (timeSpan === null || timeSpan === undefined)
-            throw new Error("The time span can not be null.");
+    subtract(timeSpan: TimeSpan): TimeSpan {
+        if (timeSpan === null || timeSpan === undefined) throw new Error("The time span can not be null.");
 
         return this.addMilliseconds(-timeSpan.milliseconds);
     }
@@ -224,13 +239,11 @@ export class TimeSpan
      * @param {Number} milliseconds Milliseconds to be added.
      * @return {TimeSpan} A reference to the time span.
      */
-    addMilliseconds(milliseconds: number): TimeSpan
-    {
+    addMilliseconds(milliseconds: number): TimeSpan {
         this.validate(milliseconds);
         this.ms += milliseconds;
 
-        if (this.ms < 0)
-            this.ms = 0;
+        if (this.ms < 0) this.ms = 0;
 
         return this;
     }
@@ -240,10 +253,8 @@ export class TimeSpan
      * @param {Number} seconds Seconds to be added.
      * @return {TimeSpan} A reference to the time span.
      */
-    addSeconds(seconds: number): TimeSpan
-    {
-        if (seconds === null || seconds === undefined)
-            throw new Error("The milliseconds can not be null.");
+    addSeconds(seconds: number): TimeSpan {
+        if (seconds === null || seconds === undefined) throw new Error("The milliseconds can not be null.");
 
         return this.addMilliseconds(seconds * TimeSpan.millisecondsPerSecond);
     }
@@ -253,10 +264,8 @@ export class TimeSpan
      * @param {Number} minutes Minutes to be added.
      * @return {TimeSpan} A reference to the time span.
      */
-    addMinutes(minutes: number): TimeSpan
-    {
-        if (minutes === null || minutes === undefined)
-            throw new Error("The milliseconds can not be null.");
+    addMinutes(minutes: number): TimeSpan {
+        if (minutes === null || minutes === undefined) throw new Error("The milliseconds can not be null.");
 
         return this.addMilliseconds(minutes * TimeSpan.millisecondsPerMinute);
     }
@@ -266,10 +275,8 @@ export class TimeSpan
      * @param {Number} hours Hours to be added.
      * @return {TimeSpan} A reference to the time span.
      */
-    addHours(hours: number): TimeSpan
-    {
-        if (hours === null || hours === undefined)
-            throw new Error("The milliseconds can not be null.");
+    addHours(hours: number): TimeSpan {
+        if (hours === null || hours === undefined) throw new Error("The milliseconds can not be null.");
 
         return this.addMilliseconds(hours * TimeSpan.millisecondsPerHour);
     }
@@ -279,10 +286,8 @@ export class TimeSpan
      * @param {Number} days Days to be added.
      * @return {TimeSpan} A reference to the time span.
      */
-    addDays(days: number): TimeSpan
-    {
-        if (days === null || days === undefined)
-            throw new Error("The milliseconds can not be null.");
+    addDays(days: number): TimeSpan {
+        if (days === null || days === undefined) throw new Error("The milliseconds can not be null.");
 
         return this.addMilliseconds(days * TimeSpan.millisecondsPerDay);
     }
@@ -291,32 +296,39 @@ export class TimeSpan
      * Converts the timespan into seconds.
      * @return {Number} Number of seconds.
      */
-    toSeconds(): number { return this.milliseconds / TimeSpan.millisecondsPerSecond; }
+    toSeconds(): number {
+        return this.milliseconds / TimeSpan.millisecondsPerSecond;
+    }
 
     /**
      * Converts the timespan into minutes.
      * @return {Number} Number of minutes.
      */
-    toMinutes(): number { return this.milliseconds / TimeSpan.millisecondsPerMinute; }
+    toMinutes(): number {
+        return this.milliseconds / TimeSpan.millisecondsPerMinute;
+    }
 
     /**
      * Converts the timespan into hours.
      * @return {Number} Number of hours.
      */
-    toHours(): number { return this.milliseconds / TimeSpan.millisecondsPerHour; }
+    toHours(): number {
+        return this.milliseconds / TimeSpan.millisecondsPerHour;
+    }
 
     /**
      * Converts the timespan into days.
      * @return {Number} Number of days.
      */
-    toDays(): number { return this.milliseconds / TimeSpan.millisecondsPerDay; }
+    toDays(): number {
+        return this.milliseconds / TimeSpan.millisecondsPerDay;
+    }
 
     /**
      * Returns a new instance copy of the current time span.
      * @return {TimeSpan} New instance copied from this one.
      */
-    copy(): TimeSpan
-    {
+    copy(): TimeSpan {
         return new TimeSpan(this.milliseconds);
     }
 
@@ -325,10 +337,8 @@ export class TimeSpan
      * @param {TimeSpan} timeSpan Time span to calculate the difference.
      * @return {Number} difference between the two time span in milliseconds.
      */
-    difference(timeSpan: TimeSpan): number
-    {
-        if (timeSpan === null || timeSpan === undefined)
-            throw new Error("The time span can not be null.");
+    difference(timeSpan: TimeSpan): number {
+        if (timeSpan === null || timeSpan === undefined) throw new Error("The time span can not be null.");
 
         return this.milliseconds - timeSpan.milliseconds;
     }
@@ -342,10 +352,8 @@ export class TimeSpan
      * @param {TimeSpan} timeSpan Time considered the total time in the percentage relation.
      * @return {Number} A Number greater or equal than 0, when 1 is 100%.
      */
-    percentage(timeSpan: TimeSpan): number
-    {
-        if (timeSpan === null || timeSpan === undefined)
-            throw new Error("The time span can not be null.");
+    percentage(timeSpan: TimeSpan): number {
+        if (timeSpan === null || timeSpan === undefined) throw new Error("The time span can not be null.");
 
         return this.milliseconds / timeSpan.milliseconds;
     }
@@ -354,8 +362,7 @@ export class TimeSpan
      * Converts the object into a string.
      * @return {String} String representation of the object.
      */
-    toString(): string
-    {
+    toString(): string {
         return this.milliseconds.toString() + "ms";
     }
 
@@ -365,8 +372,7 @@ export class TimeSpan
      * @return {TimeSpan} A time span representing the number of seconds.
      * @static
      */
-    static fromSeconds(seconds: number): TimeSpan
-    {
+    static fromSeconds(seconds: number): TimeSpan {
         return new TimeSpan(seconds * TimeSpan.millisecondsPerSecond);
     }
 
@@ -376,8 +382,7 @@ export class TimeSpan
      * @return {TimeSpan} A time span representing the number of minutes.
      * @static
      */
-    static fromMinutes(minutes: number): TimeSpan
-    {
+    static fromMinutes(minutes: number): TimeSpan {
         return new TimeSpan(minutes * TimeSpan.millisecondsPerMinute);
     }
 
@@ -387,8 +392,7 @@ export class TimeSpan
      * @return {TimeSpan} A time span representing the number of hours.
      * @static
      */
-    static fromHours(hours: number): TimeSpan
-    {
+    static fromHours(hours: number): TimeSpan {
         return new TimeSpan(hours * TimeSpan.millisecondsPerHour);
     }
 
@@ -398,8 +402,7 @@ export class TimeSpan
      * @return {TimeSpan} A time span representing the number of days.
      * @static
      */
-    static fromDays(days: number): TimeSpan
-    {
+    static fromDays(days: number): TimeSpan {
         return new TimeSpan(days * TimeSpan.millisecondsPerDay);
     }
 
@@ -407,16 +410,11 @@ export class TimeSpan
      * Validates the numerical value.
      * @param milliseconds
      */
-    private validate(milliseconds: number): void
-    {
-        if (milliseconds === null || milliseconds === undefined)
-            throw new Error("The milliseconds can not be null.");
+    private validate(milliseconds: number): void {
+        if (milliseconds === null || milliseconds === undefined) throw new Error("The milliseconds can not be null.");
 
-        if (isNaN(milliseconds))
-            throw new Error("The milliseconds can not be NaN.");
+        if (isNaN(milliseconds)) throw new Error("The milliseconds can not be NaN.");
 
-        if (!isFinite(milliseconds))
-            throw new Error("The milliseconds can not be infinite");
+        if (!isFinite(milliseconds)) throw new Error("The milliseconds can not be infinite");
     }
-
 }

@@ -4,8 +4,7 @@
  * Licensed under MIT (https://github.com/MiracleDevs/Paradigm.Web.Shared/blob/master/LICENSE)
  */
 
-export class PersonMock
-{
+export class PersonMock {
     public name: string;
 
     public lastName: string;
@@ -16,8 +15,11 @@ export class PersonMock
 
     public children: Array<PersonMock>;
 
-    constructor()
-    {
+    constructor() {
+        this.name = "";
+        this.lastName = "";
+        this.age = 0;
+        this.isAlive = true;
         this.children = [];
     }
 }

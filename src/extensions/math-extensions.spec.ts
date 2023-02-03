@@ -6,10 +6,8 @@
 
 import { MathExtensions } from "./math-extensions";
 
-describe("Math", () =>
-{
-    describe("clamp", () =>
-    {
+describe("Math", () => {
+    describe("clamp", () => {
         it("should clamp number greater than the maximum number in the range", () => expect(MathExtensions.clamp(10, 0, 5)).toBe(5));
 
         it("should clamp number lesser than the maximum number in the range", () => expect(MathExtensions.clamp(-10, 0, 5)).toBe(0));

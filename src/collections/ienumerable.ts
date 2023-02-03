@@ -4,17 +4,16 @@
  * Licensed under MIT (https://github.com/MiracleDevs/Paradigm.Web.Shared/blob/master/LICENSE)
  */
 
-export interface IEnumerable<TElement>
-{
+export interface IEnumerable<TElement> {
     forEach(action: (element: TElement) => void): void;
 
     where(predicate: (element: TElement) => boolean): IEnumerable<TElement>;
 
     select<TR>(predicate: (element: TElement) => TR): IEnumerable<TR>;
 
-    firstOrDefault(predicate?: (element: TElement) => boolean): TElement;
+    firstOrDefault(predicate?: (element: TElement) => boolean): TElement | null;
 
-    lastOrDefault(predicate?: (element: TElement) => boolean): TElement;
+    lastOrDefault(predicate?: (element: TElement) => boolean): TElement | null;
 
     first(predicate?: (element: TElement) => boolean): TElement;
 
@@ -24,7 +23,7 @@ export interface IEnumerable<TElement>
 
     count(predicate?: (element: TElement) => boolean): number;
 
-    sum<TI>(predicate?: (element: TElement) => TI): TI;
+    sum<TI>(predicate?: (element: TElement) => TI): TI | null;
 
     orderBy<TR>(predicate?: (element: TElement) => TR): IEnumerable<TElement>;
 

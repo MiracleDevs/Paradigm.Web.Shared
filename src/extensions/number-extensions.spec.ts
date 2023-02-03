@@ -6,10 +6,8 @@
 
 import { NumberExtensions } from "./number-extensions";
 
-describe("Number", () =>
-{
-    describe("is number", () =>
-    {
+describe("Number", () => {
+    describe("is number", () => {
         it("should be true if number", () => expect(NumberExtensions.isNumber(1)).toBe(true));
 
         it("should be false if NaN", () => expect(NumberExtensions.isNumber(NaN)).toBe(false));
@@ -26,6 +24,6 @@ describe("Number", () =>
 
         it("should be false if array", () => expect(NumberExtensions.isNumber([1, 2, 3])).toBe(false));
 
-        it("should be false if object", () => expect(NumberExtensions.isNumber({ })).toBe(false));
+        it("should be false if object", () => expect(NumberExtensions.isNumber({})).toBe(false));
     });
 });

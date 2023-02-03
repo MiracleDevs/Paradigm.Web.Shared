@@ -6,12 +6,10 @@
 
 import { Dictionary } from "./collections/dictionary";
 
-export class FileMimeType
-{
+export class FileMimeType {
     private extensions: Dictionary<string, string>;
 
-    public constructor()
-    {
+    public constructor() {
         this.extensions = new Dictionary<string, string>();
 
         this.extensions.add("ez", "application/andrew-inset");
@@ -954,34 +952,28 @@ export class FileMimeType
         this.extensions.add("appcache", "text/cache-manifest");
     }
 
-    containsExtension(fileName: string): boolean
-    {
-        var extension = this.getExtension(fileName);
+    containsExtension(fileName: string): boolean {
+        const extension = this.getExtension(fileName);
         return this.extensions.containsKey(extension);
     }
 
-    get(fileName: string): string
-    {
-        var extension = this.getExtension(fileName);
+    get(fileName: string): string {
+        const extension = this.getExtension(fileName);
 
-        if (!this.extensions.containsKey(extension))
-            throw new Error(`The mime type can not be retrieved for the extension '${extension}'.`);
+        if (!this.extensions.containsKey(extension)) throw new Error(`The mime type can not be retrieved for the extension '${extension}'.`);
 
         return this.extensions.get(extension);
     }
 
-    private getExtension(fileName: string): string
-    {
-        if (!fileName)
-            throw new Error("File name can not be null.");
+    private getExtension(fileName: string): string {
+        if (!fileName) throw new Error("File name can not be null.");
 
         const parts = fileName.toLowerCase().split(".");
 
-        if (parts.length < 2)
-           throw new Error("File name without extension.");
+        if (parts.length < 2) throw new Error("File name without extension.");
 
         return parts[parts.length - 1];
     }
 }
 
-export var fileMimeType = new FileMimeType();
+export const fileMimeType = new FileMimeType();
